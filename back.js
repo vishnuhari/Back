@@ -49,7 +49,7 @@ ctx.fillRect(0, canvas.height - 80, canvas.width * 2, 20);
     ["t t t t o o o o t t t t o"]
   ];
  */
- var startPos = {x : 0, y : canvas.height-150};
+ var marioStartPos = {x : canvas.width - 70, y : canvas.height-150};
  var mario = [
   "ooorrrrrroooo",
   "oorrrrrrrrrro",
@@ -77,22 +77,23 @@ for(var i=0; i<mario.length; i++)
 		{
 			case "r":
 				ctx.fillStyle = "#FF0000";
-				ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
+				ctx.fillRect(marioStartPos.x + j*5, marioStartPos.y + i*5, 5, 5);
 				break;
 			case "o":
 				ctx.fillStyle = "#FFFFFF";
+				//ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
 				break;
 			case "b":
 				ctx.fillStyle = "#0000FF";
-				ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
+				ctx.fillRect(marioStartPos.x + j*5, marioStartPos.y + i*5, 5, 5);
 				break;
 			case "t":
 				ctx.fillStyle = "#555555";
-				ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
+				ctx.fillRect(marioStartPos.x + j*5, marioStartPos.y + i*5, 5, 5);
 				break;	
 			case "p":
 				ctx.fillStyle = "#ffd699";
-				ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
+				ctx.fillRect(marioStartPos.x + j*5, marioStartPos.y + i*5, 5, 5);
 				break;
 		}
 	}
@@ -122,3 +123,47 @@ for(var i=0; i<mario.length; i++)
   ),
   */
   
+var ghost =[
+"oooookkkkkoooooo",
+"oookkwwwwwkkoooo",
+"ookwwwwwwwwwkooo",
+"okwwwwwwwwwwwkoo",
+"okwkwkwwwwwwwwko",
+"kwwkwkwwwwkkkwwk",
+"kwwkwkwwwkwwkwwk",
+"kwwwwwwwwwwwkwko",
+"kwrwrwrwwwwkwwwk",
+"kwrrrrrwwwwwwwwk",
+"kwrrrrrwwwwwwwwk",
+"okwrrrrrwwwwwwwk",
+"okwrwrwrwwwwwwko",
+"ookwwwwwwwwwwkoo",
+"oookkwwwwwwkkooo",
+"oooookkkkkkooooo"
+];
+var ghostStartPos = {x : 70, y : canvas.height-150};
+for(var i=0; i<ghost.length; i++)
+{
+	for(var j=0; j<ghost[i].length; j++)
+	{
+		switch(ghost[i][j])
+		{
+			case "r":
+				ctx.fillStyle = "#FF0000";
+				ctx.fillRect(ghostStartPos.x + j*5, ghostStartPos.y + i*5, 5, 5);
+				break;
+			case "o":
+				ctx.fillStyle = "#FFFFFF";
+				//ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
+				break;
+			case "w":
+				ctx.fillStyle = "#DDDDDD";
+				ctx.fillRect(ghostStartPos.x + j*5, ghostStartPos.y + i*5, 5, 5);
+				break;
+			case "k":
+				ctx.fillStyle = "#555555";
+				ctx.fillRect(ghostStartPos.x + j*5, ghostStartPos.y + i*5, 5, 5);
+				break;	
+		}
+	}
+}
