@@ -7,7 +7,18 @@
 		{
 			ctxBg.fillStyle = "#000099";
 		    ctxBg.fillRect(0,0, canvas.width, canvas.height);
-		
+	
+			//grass
+			ctxBg.fillStyle = "#00ff00";
+			ctxBg.beginPath();
+            for(var i =0; i<= 600; i +=20)
+		    {
+				var r = 9 + Math.random() * 5;
+				ctxBg.arc(0 + i, canvas.height - 150, r, Math.PI, 0);
+				ctxBg.fill();
+			}
+			ctxBg.fillRect(0, canvas.height - 150, canvas.width , 100);
+			
 			//ground
 			ctxBg.fillStyle = "#993300";
 			ctxBg.fillRect(0, canvas.height - 80, canvas.width * 2, 80);
@@ -15,18 +26,28 @@
 			ctxBg.shadowOffsetY =2;
 			ctxBg.shadowBlur = 2;
 			ctxBg.shadowColor = "#111111";
-			for(var i = 50; i < canvas.width *2; i+= 100)
-			{
-				ctxBg.beginPath();
-				ctxBg.fillStyle = "#551100";
-				
-				ctxBg.arc(i,canvas.height - ( Math.log10(i)*10), y/5, 0, 360);
-				ctxBg.fill();
-				ctxBg.closePath();
-			}
 			ctxBg.fillStyle = "#248f24";
 			ctxBg.fillRect(0, canvas.height - 80, canvas.width * 2, 20);
-			  
+			
+			//cloud
+			ctxBg.fillStyle = "#ffffffcc";
+			ctxBg.beginPath();
+            for(var i =0; i<= 600; i +=20)
+		    {
+				var r =  Math.random() * 30;
+				if(r>20)
+				{
+					ctxBg.arc(0 + i,  50, r, 2*Math.PI, 0);
+					ctxBg.fill();
+					ctxBg.arc(10 + i,  50, r *.75, 2*Math.PI, 0);
+					ctxBg.fill();
+					ctxBg.arc(-20 + i,  50, r *.5, 2*Math.PI, 0);
+					ctxBg.fill();
+				}
+			}
+			//ctxBg.fillRect(0, canvas.height - 150, canvas.width , 100);
+			
+
 		};
 		
 		

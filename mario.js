@@ -2,7 +2,8 @@
   
   var Mario = function(){
 	  
-	  this.marioStartPos = {x : canvas.width - 70, y : canvas.height-150};
+	  this.marioInitialPos = {x :  70, y : canvas.height-150};
+	  this.marioStartPos = {x :  70, y : canvas.height-150};
 	  this.marioArt = [
 					"ooorrrrrroooo",
 					"oorrrrrrrrrro",
@@ -62,7 +63,6 @@
 	  this.MoveMario = function(speed)
 		{
 			speed = speed || 1;
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			this.marioStartPos.x += -speed;	
 			for(var i=0; i<this.marioArt.length; i++)
 				{
@@ -71,6 +71,7 @@
 						switch(this.marioArt[i][j])
 						{
 							case "r":
+						//ctx.clearRect(this.marioStartPos.x +speed + j*5, this.marioStartPos.y + i*5, 5, 5);
 								ctx.fillStyle = "#FF0000";
 								ctx.fillRect(this.marioStartPos.x + j*5, this.marioStartPos.y + i*5, 5, 5);
 								break;
@@ -79,18 +80,22 @@
 								//ctx.fillRect(startPos.x + j*5, startPos.y + i*5, 5, 5);
 								break;
 							case "b":
+							//ctx.clearRect(this.marioStartPos.x +speed + j*5, this.marioStartPos.y + i*5, 5, 5);
 								ctx.fillStyle = "#0000FF";
 								ctx.fillRect(this.marioStartPos.x + j*5, this.marioStartPos.y + i*5, 5, 5);
 								break;
 							case "t":
+							//ctx.clearRect(this.marioStartPos.x +speed + j*5, this.marioStartPos.y + i*5, 5, 5);
 								ctx.fillStyle = "#555555";
 								ctx.fillRect(this.marioStartPos.x + j*5, this.marioStartPos.y + i*5, 5, 5);
 								break;	
 							case "p":
+						//	ctx.clearRect(this.marioStartPos.x +speed + j*5, this.marioStartPos.y + i*5, 5, 5);
 								ctx.fillStyle = "#ffd699";
 								ctx.fillRect(this.marioStartPos.x + j*5, this.marioStartPos.y + i*5, 5, 5);
 								break;
 							case "k":
+						//	ctx.clearRect(this.marioStartPos.x +speed + j*5, this.marioStartPos.y + i*5, 5, 5);
 							   ctx.fillStyle = "#000000";
 							   ctx.fillRect(this.marioStartPos.x + j*5, this.marioStartPos.y + i*5, 5, 5);
 							   break;
@@ -98,6 +103,64 @@
 					}
 				}
 			//window.requestAnimationFrame(MoveMario);
+		};
+		
+		this.jump = function (height, frameCount)
+		{
+			this._onJump = true;
+			if(height)
+				this._height = height;
+			if(frameCount)
+				{
+					this._frameCount = frameCount;
+					this._heightFactor = height/frameCount;
+				}
+			window.requestAnimationFrame(function ()
+			{
+				if(this._frameCount<=0)
+						{
+							this._heightFactor *= 1.2;
+							this.marioStartPos.y += this._heightFactor;
+						}
+				else
+						{
+							this._heightFactor *= .9;
+							this.marioStartPos.y -= this._heightFactor;
+						}
+						
+				this._frameCount--;
+				//console.log("initial = " + this.marioInitialPos.y + );
+				if(this.marioInitialPos.y > this.marioStartPos.y)
+				{
+					this.jump();	
+				}
+				else
+				{
+					this.marioStartPos.y = this.marioInitialPos.y;
+					this._onJump = false;	
+				}
+			}.bind(this)
+			);
+		}
+		
+		this.updateMarioPos = function(x, y)
+		{
+			this.marioStartPos.x += x;
+			this.marioStartPos.y += y;
+			this.drawMario();
+		};
+		
+		this.getMarioBack = function()
+		{
+			return this.marioStartPos.x;
+		};
+		this.getMarioFront = function()
+		{
+			return this.marioStartPos.x + (this.marioArt[0].length*5);
+		};
+		this.getMarioLegPos = function()
+		{
+			return this.marioStartPos.y + (this.marioArt.length*5);
 		};
 	  
   };
