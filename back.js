@@ -11,6 +11,7 @@
   var SCORE = 0;
   var SCOREFACTOR = 5;
   var PREVSCORE = 0;
+  var HIGHSCORE = 0;
 
   
   var checkCollision = function()
@@ -45,10 +46,15 @@
   				ctx.fillText("LIFES : " + LIFE, 10, 20);
 				ctx.textAlign = "right";
 				ctx.fillText(" SCORE : " + SCORE, canvas.width - 10, 20);
+				ctx.textAlign = "center";
+				if(HIGHSCORE > 0)
+					ctx.fillText("HIGH SCORE : " + HIGHSCORE, canvas.width/2, 20);
 				if(LIFE <= 0)
 				{
 					GAMESTARTED = false;
 					PREVSCORE = SCORE;
+					if(HIGHSCORE < SCORE)
+						HIGHSCORE = SCORE;
 					SCOREFACTOR =5;	
 				}
 		};
@@ -92,9 +98,11 @@
             if (code === "ArrowRight")
 			{
 			   pressedKeys.R = true;
+			   mario.turnMario("R");
             }
             if (code === "ArrowLeft") {
 				pressedKeys.L = true;
+				mario.turnMario("L");
             }
             if ((code === "ArrowUp" || pressedKeys.U) && !mario._onJump) {
                 mario.jump(400,20);
@@ -135,7 +143,7 @@
 	  ctx.fillText(" Trap the Ghost from Back!",canvas.width/2, 50);
 	  ctx.font = "15px Arial";
 	  ctx.fillText(" Colliding Ghost from FRONT will lose a life.", canvas.width/2, 100);
-	  ctx.fillText(" Jump over the Ghost and catch it from backside to earn points.", canvas.width/2, 125);
+	  ctx.fillText(" Jump over the Ghost and catch it from BACK to earn points.", canvas.width/2, 125);
 	  ctx.fillText(" Use " + String.fromCharCode(8701) +" and " + String.fromCharCode(8702) + " arrow keys to Move Backward and Forward.", canvas.width/2, 200);
 	  ctx.fillText(" Press " + String.fromCharCode(8593) +" arrow to JUMP.", canvas.width/2, 225);
 	  ctx.font = "18px Arial";
